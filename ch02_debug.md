@@ -22,13 +22,12 @@ Ch02 錯與除錯
 ### 2.1.1 臭蟲
 
 <center>
-<img src="https://hackmd.io/_uploads/S1lpG3YA3.png" width="200">
+<img src="img/ch02/bug.png" width="200">
 </center>
 
 1947 年 9 月 9 日下午 3 點 45 分，**Grace Murray Hopper** 在她的筆記本上記下了史上第一個電腦 bug ——在 Harvard Mark II 電腦裡找到的一隻飛蛾，她把飛蛾貼在日記本上，並寫道「First actual case of bug being found」。這個發現奠定了 Bug 這個詞在電腦世界的地位，變成無數苦逼程式設計師的噩夢。 從那以後，bug 這個詞在電腦世界表示電腦程式中的錯誤或者疏漏，它們會使程式計算出莫名其妙的結果，甚至引起程式的崩潰。Grace Murray Hopper 是Harvard Mark I上第一個專職程式設計師，創造了現代第一個編譯器A-0 系統，以及第一個高級商用電腦程式語言「COBOL」，被譽為「COBOL 之母」，被稱為「不可思議的葛麗絲（Amazing Grace）」。
 
-![](https://hackmd.io/_uploads/rJVf7nYR3.png)
-:barber: The first bug
+![The first bug](img/ch02/firstbug.png)
 
 這是流傳最廣的關於電腦 bug 的故事，可是歷史的真相是，bug 這個詞早在發明家湯瑪斯·愛迪生的年代就被廣泛用於指機器的故障，這在愛迪生本人的 1870 年左右的筆記裡面也能看得到。而電氣電子工程師學會 IEEE 也將 bug 這一詞的引入歸功於愛迪生哪些臭名昭彰的軟體 bug 名留青史？
 
@@ -124,7 +123,7 @@ Ace 耐著性子仔細的了解來龍去脈後說：「這是預設值，預設�
 然而，如果一味的要求規格書要寫完整所有的規格，在現實環境也是很困難的。在沒有爭議，一看便能夠確認是錯誤的情況下，我們是可以直接認定為錯誤的。當有模糊不確定的時候，我們再讓規格書來做確認。
 
 
-![](https://hackmd.io/_uploads/HkT4m2KC3.png)
+![失效，缺陷與低品質](img/ch02/BugDefectLowQuality.png)
 :barber: 失效，缺陷與低品質
 
 上圖說明失效、缺陷和低品質的關係。沒有失效並不代表系統沒有缺陷。沒有缺陷的系統也只是表示符合規格所定義的，規格書很難寫清楚的東西包含 非功能性需求，例如效能、可使用性、可維護性、可重用性等; 程式也可能沒有註解、沒有結構化設計、沒有考慮到容錯等，屬於低品質的軟體設計。
@@ -173,7 +172,7 @@ p[1].sleep();
 
 FIG: Race condition in multiple threads
 
-<img src="https://hackmd.io/_uploads/r1nY7nK02.png" width="300">
+<img src="img/ch02/RaceCondition.png" width="300">
 
 
 #### 多執行緒程式臭蟲
@@ -208,7 +207,7 @@ FIG: Race condition in multiple threads
 - *檢視* Review and inspection。透過檢視來查看文件或程式碼可能的錯誤。
 - *根源問題分析* Root cause analysis。長期收集錯誤發生的現象，分析錯誤發生的原因。這是流程改善的一環。
 
-![](https://hackmd.io/_uploads/Bkx7EhKA3.png)
+![](img/ch02/tdd.png)
 :barber: Test first development
 
 
@@ -243,7 +242,7 @@ FIG: Race condition in multiple threads
 - *經驗*。這是少不了的，很多類似的情節可以馬上判斷出犯人的手法。
 - *第六感*。就是覺得哪裡怪怪的。
 
-![](https://hackmd.io/_uploads/SJ0aYiF02.jpg)
+![](img/ch02/detective.jpg)
 :barber: 除錯時要秉持著偵探的態度
 
         
@@ -307,7 +306,7 @@ Ex:football: 已知格式錯誤且住址長度超過50 以上，會產生Err101 
 
 :::success
 Ex:basketball: 有時候我們需要從一些線索（或現象）來推斷因果。例如，由一些使用者的回報現象如表，系統失效可能原因是什麼？
-<img src="https://hackmd.io/_uploads/r1nWioKAh.png" width="250">
+<img src="img/ch02/tsr.png" width="250">
 ```
 
 

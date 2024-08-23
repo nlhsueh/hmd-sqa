@@ -1,13 +1,14 @@
 # Ch01 簡介
 
-:::info
-大家都知道物質不滅定律; 我們更熟悉 Bug 不滅定律。
-:::
 
+
+<div style="background-color: #DAA520;padding:20px;">
+大家都知道物質不滅定律; 我們更熟悉 Bug 不滅定律。
+</div>
 
 ## 1.1 軟體危機
 
-<img src = "img/ch01/ch01_ship.png" width=200>
+<img src = "img/ch01/ship.png" width=200>
 
 
 水能載舟亦能覆舟，軟體也是如此，有許多軟體問題造成飛機失事，造成醫療糾紛，財務的損失等。
@@ -29,16 +30,16 @@
 
 FIG: Mars Climate Orbiter (MCO) crash in 1998 
 
-![](https://hackmd.io/_uploads/ByBqT9KRn.png)
-
+![](img/ch01/mars.png)
 
 #### 華航名古屋空難
 
 1994年4月26日，華航編號為B-1816的空中巴士A300-622R型客機由桃園國際機場飛往名古屋的班機，搭載271名乘客及機組員（包含正駕駛王樂琦，副駕駛莊孟容及飛航工程師），在名古屋機場降落時不幸墬毀，造成264人死亡。根據1995年1月9日聯合報引述日本名古屋空難調查委員會的調查結果，空難原因為「副駕駛在操縱飛機降落時，不小心誤將飛機設定在「重飛」（go-around，意思是中止降落重新爬升），而因駕駛員一直不知飛機設定在「重飛」的自動操作狀態下，駕駛員努力用手動操作，想要將機首壓低，而因電腦在「重飛」爬升自動操作狀態，電腦將機尾的水平安定面（horizontal stabilizer）設定到機首上升的狀態「糾正」駕駛員「錯」的壓低機首的手動操作，結果在電腦與駕駛員操作機首角度的爭鬥中，飛機向上衝的攻角過大而失去平衡，最後失速墜毀。
 
-FIG: 1994 名古屋空難
-
-![1994 名古屋空難](https://attach.setn.com/newsimages/2021/04/26/3128315-PH.jpg)
+<div style="text-align: center;">
+<img src="https://attach.setn.com/newsimages/2021/04/26/3128315-PH.jpg">
+<p>圖：1994 名古屋空難</p>
+</div>
 
 一審判決忽略空中巴士公司的飛機設計問題，名古屋高等法院裁定，名古屋空難完全是因為華航駕駛操縱失誤所造成。為免再發生類似的航空事件，歐洲空中巴士公司發出維修指令，*修改A300系列的電腦程式以防止駕駛員與電腦互搶操控權而衝突*。
 
@@ -54,7 +55,6 @@ FIG: 1994 名古屋空難
 - 2014，[臺灣新戶政系統相容問題](https://www.businesstoday.com.tw/article/category/80392/post/201402200025/)，造成系統無法製作身分證明;
 - 2014，臺灣高速公路收費系統。
 
---
 
 解決這些問題就是軟體工程與軟體品質工程應該要做的事。也是這門課，這本課程的目的。
 
@@ -144,7 +144,9 @@ FIG: 1994 名古屋空難
 
 FIG: 不同物品的品質特性各有不同
 
-<img src="https://hackmd.io/_uploads/BJFQmsH03.png" width="500">
+<!-- <img src="https://hackmd.io/_uploads/BJFQmsH03.png" width="500"> -->
+
+![](img/ch01/table_car.png)
 
 
 擴充性和跨平台執行就不是汽車產業重要的品質項目之一，但對軟體產業來說卻是非常的重要。不同產業、物品有其不同的品質模型。軟體品質模型有很多，例如 McCall, Boehm's Quality model, FURPS+ model 和 ISO 9126 ，以下我們介紹 ISO 9126 的品質模型。
@@ -155,8 +157,8 @@ ISO 9126 將品質分為六大特性，如 Fig ISO ，每一個特性下又分�
 
 
 FIG ISO: ISO 9126 軟體品質模型
-![](https://hackmd.io/_uploads/r1YdmoB03.png)
 
+![](img/ch01/iso.png)
 
 #### 一、功能性 Functionality
 
@@ -315,7 +317,7 @@ ISO 9126 除了定義有哪些品質項目以外，它還定義了這些品質�
 
 製造業如何控制品質呢？通常有兩種方法。(1)  透過機械化來控制品質。機器不會對於重複的工作感到繁瑣，無聊，也因此叫不會犯錯。然而在生產的過程避免不了人工。(2)  如果機器無法代勞，需要人工的，就讓每個人做單一重複不會犯錯的工作。所以我們看到生產線上總是那麼多人的作業人員單調的、反覆的做同一件事，就是為了避免犯錯。
 
-![](https://hackmd.io/_uploads/SJKeq0002.png)
+![](img/ch01/factory.png)
 
 品質管理問題：製造過程從設計到生產有數十道到幾百道程序。每一道程序都可能影響到後面的品質。如何透過製造流程的改善（process improvement）提高良率，一直是製造工業的重要課題。改善品質方式：
 
@@ -324,13 +326,11 @@ ISO 9126 除了定義有哪些品質項目以外，它還定義了這些品質�
 
 以「簡單化」來說，*軟體和製造業不同不一樣，我們無法讓第一個人寫第一行，第二個人寫第二行*。所以品質確保得用其他的方式。
 
-<img src="img/intro/ProductLine.png" width="500">
 
 ### 軟體品質控制與確保
 
-FIG_SQA
 
-![](https://hackmd.io/_uploads/BJYnNoBR2.png)
+![](img/ch01/sqa_process.png)
 
 一個不成熟的軟體公司，就如同 FIG_SQA 第一階段一樣，軟體開發完後就直接發佈了，但這種方法會產生很多問題，甚至導致退貨賠款，於是知道開發完後需要做一些測試（code review, testing）- 此時公司進步到第二階段。
 
@@ -467,8 +467,6 @@ SQA 通常被翻譯成「軟體品質保證」，或「品保」，但這樣的�
 (3) 富士通：程式是他們寫的，明顯的錯誤卻沒有找出來，釀成災害
 
 <iframe src="https://app.sli.do/event/gLwti2MRPLrmdd9v4aEcx4/embed/polls/f6b6ffb9-db04-49da-b830-9dfdcbf8fddc" width="300" height="400"></iframe>
-
-![](https://hackmd.io/_uploads/HkUk9BWxT.png)
 
 
 :question: 身為軟體工程師的你，受到什麼啟示？
