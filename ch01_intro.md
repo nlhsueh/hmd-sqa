@@ -381,8 +381,6 @@ SQA 通常被翻譯成「軟體品質保證」，或「品保」，但這樣的�
 
 ### 瑞穗證券的烏龍指
 
-{%youtube BnBGh5wcpXo%}
-
 [YT: 瑞穗證券的烏龍指](https://youtu.be/BnBGh5wcpXo?si=-usiV6GHfGFElGrp)
 
 
