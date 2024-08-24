@@ -1,10 +1,6 @@
 # Ch01 簡介
 
-
-
-<div style="background-color: #DAA520;padding:20px;">
-大家都知道物質不滅定律; 我們更熟悉 Bug 不滅定律。
-</div>
+> 大家都知道物質不滅定律; 我們更熟悉 Bug 不滅定律。
 
 ## 1.1 軟體危機
 
