@@ -1,21 +1,20 @@
 Ch02 錯與除錯
 ===
 
-:::info
-一夥程式設計師正在啟奏當今皇上。「今年有什麼偉大的成就嗎？」皇上問道。
 
-程式設計師私下討論了一會兒，然後回話：「比起去年，我們今年多修正了50% 的Bug」。
+    一夥程式設計師正在啟奏當今皇上。「今年有什麼偉大的成就嗎？」皇上問道。
 
-皇上滿臉困惑的看著他們。他顯然並不知道「Bug」是什麼。他低聲與宰相商量一會兒，然後轉向這些程式設計師，面露慍色。
+    程式設計師私下討論了一會兒，然後回話：「比起去年，我們今年多修正了50% 的Bug」。
 
->「你們犯了品質管制不良之罪。明年起不得在有任何的Bug！」
+    皇上滿臉困惑的看著他們。他顯然並不知道「Bug」是什麼。他低聲與宰相商量一會兒，然後轉向這些程式設計師，面露慍色。
 
-他當庭宣下這道聖旨。
+    >「你們犯了品質管制不良之罪。明年起不得在有任何的Bug！」
 
-當然啦，明年當這夥程式設計師再度向皇上奏報時，就完全不提 Bug 的事了 
+    他當庭宣下這道聖旨。
 
-(取自溫伯格的「軟體管理學」第一卷 系統化思考)。
-:::
+    當然啦，明年當這夥程式設計師再度向皇上奏報時，就完全不提 Bug 的事了 
+
+    (取自溫伯格的「軟體管理學」第一卷 系統化思考)。
 
 ## 2.1 臭蟲與錯誤
 
@@ -327,11 +326,146 @@ $installK \wedge onWindow10 \Rightarrow Abnormal$
 
 ## 2.3 除錯工具 (lab)
 
-[除錯工具- Java 實作](https://hackmd.io/@nlhsueh/rJqFZl3xa)
+
+除了理論以外，動手做是很重要的。以下的實作以 Java 為主，工具以 Eclipse 環境為主。測試的工具非常的多，這裡的實驗只是希望大家透過實作了解理論，真正的作業環境還是得看您開發的需求而定。
+
+Debug 面板（Debug perspective）是一個可以方便你除錯的面板。包含以下的功能
+
+- 中斷點 Breakpoint。Resume 可以讓程式執行在下一個中斷點。
+- 看變數 Watch variable，例如觀看 i 目前的值為何。
+- 逐步執行 Step by step tracking code。Step into, Step over 可以逐步執行程式碼，前者會進入副程式的內部追蹤程式碼，後者會跳過副程式。
+- 看表示式的值 (Expression)，例如 i+j 目前的值。
+- 進階中斷點應用。在迴圈中中斷停太多次怎麼辦？透過 Hit count 來跳過許多可能的中斷。當 Hit count 設為 n 時，第 n 次的中斷點程式才會停下來。
+
+
+### 程式碼中斷點（Breakpoint）
+
+程式碼中斷點（Breakpoint）是程式開發和調試中的一個重要工具，用於在執行程式時暫停執行，以便開發者可以檢查程式的狀態、變數的值以及程式流程，以幫助偵錯和調試。
+
+以下是程式碼中斷點的主要特徵和功能：
+
+1. **暫停程式執行：** 中斷點可在程式碼中的特定行號或條件滿足時暫停程式的執行，使開發者能夠觀察程式的狀態。
+2. **變數值觀察：** 在中斷點處，開發者可以查看和監視變數的值。這有助於了解變數如何在程式執行過程中變化，有助於偵錯。
+3. **堆疊追蹤：** 中斷點也允許開發者查看呼叫堆疊（call stack），即程式中當前的函數調用層次結構。這對於理解程式的執行流程和函數之間的相互作用很有幫助。
+4. **條件斷點：** 開發者可以設置條件斷點，即只有當某個特定條件滿足時，中斷點才會觸發。這對於在特定情況下調試程式很有用。
+5. **單步執行：** 一旦程式停在中斷點處，開發者可以逐步執行程式，進行一步一步的調試，以確保程式的每個部分都按預期運行。
+6. **修改程式狀態：** 在某些調試工具中，您還可以在中斷點處修改變數的值，以測試不同的情景和修復問題。
+
+程式碼中斷點是開發者在尋找程式中的錯誤或進行性能分析時的強大工具。通過使用中斷點，開發者可以更有效地理解和改進他們的程式。
+
+### IntelliJ 使用中斷點
+在 IntelliJ IDEA 中，使用中斷點是一個相對簡單的過程。以下是在 IntelliJ 中設置和使用中斷點的基本步驟：
+
+1. **打開專案：** 首先，打開您的 IntelliJ IDEA 項目，然後打開您想要設置中斷點的 Java 類或其他程式文件。
+2. **選擇行號：** 在您的程式碼中找到您希望設置中斷點的行號。您可以在行號的左側編輯器邊欄中單擊一次，以在該行號上設置一個常規中斷點。中斷點將顯示為==紅色圓點==。
+3. **選擇條件（選擇性）：** 如果您想要設置條件中斷點，右鍵單擊中斷點並選擇 "Edit Breakpoint"（編輯中斷點）。在對話框中，您可以指定中斷點的條件，只有當條件成立時才會觸發中斷點。
+4. **運行程式：** 接下來，運行您的程式。您可以使用 "Run" 菜單或按快捷鍵 `Shift + F10` 來運行程式。
+5. **中斷點觸發：** 當程式執行到您設置的中斷點時，它將自動暫停執行。此時，您可以檢查變數、查看堆疊追蹤，並使用調試工具欄上的控制按鈕（例如，單步執行、繼續、中止等）來控制程式的執行流程。
+6. **解除中斷點（選擇性）：** 一旦您完成了調試，您可以選擇是否保留中斷點。您可以右鍵單擊中斷點，然後選擇 "Toggle Breakpoint"（切換中斷點）來解除或重新設置中斷點。
+
+![](./img/ch02/intellij_debug.png)
+
+可以選取一個 expression 來看他的值：
+
+![](https://hackmd.io/_uploads/rkYkuntA3.png)
+:barber: watch Expression
+
+:::success
+Ex:ice_skate: 設計一個程式，要求使用者輸入一個直徑，然後輸出其面積
+
+
+```java
+import java.util.Scanner;
+
+public class BreakpointDemo {
+
+    public static void main(String[] args) {
+        computeArea();
+    }
+
+    public static void computeArea() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter diameter: ");
+        int diameter = input.nextInt();
+
+        double area = Math.PI * Math.pow(diameter / 2, 2);
+        System.out.println(area);
+    }
+}
+```
+:::
+
+大家覺得上面的程式有沒有問題？請用中斷點來除錯。
+
+
+:::success
+Ex:football: 請利用除錯工具來修復以下的程式
+
+```java
+/*
+ * 這是一個有錯的程式，請利用 breakpoint 來除錯
+ */
+public class BubbleSort {
+
+    public static void main(String[] args) {
+        int[] data = {1, 2, 3, 10, 9, 6, 7};
+        System.out.print("data:\t");
+        printArray(data);
+
+        sort(data); //這時候 data 會有異動
+        System.out.print("data:\t");
+        printArray(data);//看看排序是否正確
+
+        // 產生一個新的 data2 陣列，但部分內容對調
+        int len = data.length;
+        int a = (int) (Math.random() * len + 1);
+        int b = (int) (Math.random() * len + 1);
+        // 預期 data 內的資料不會受影響
+        int[] data2 = exchange(data, a, b);
+
+        System.out.print("data2:\t");
+        printArray(data2);//看看 交換後的狀況
+        System.out.print("data:\t");
+        printArray(data); //data 不該有異動        
+    }
+
+    public static int[] exchange(int[] data, int i, int j) {
+        int temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+        return data;
+    }
+
+    public static void sort(int[] data) {
+        for (int i = 0; i < data.length - 1; i++) {
+            if (data[i] > data[i + 1]) {
+                data[i] = data[i + 1];
+                data[i + 1] = data[i];
+            }
+        }
+    }
+
+    public static void printArray(int[] data) {
+        for (int x : data)
+            System.out.print(x + "\t");
+        System.out.println();
+    }
+}
+```
+:::
+
+
+:::success
+:question: 以下程式，當我們把 breakpoint 設在第 2 行時，variable 的視窗呈現 a 的值是多少？(1) 100 (2) 101
+
+```java
+int a = 100;
+a = a + 1;
+```
+:::
 
 
 ## 2.4 防禦性編程 (lab)
-
 
 開車遇到綠燈你會直接闖過去嗎？多數的時候我們還是會減慢速度，因為我們不知道對方會不會闖紅燈，這樣的開車方式式一種「防禦性」開車方式。寫程式也有同樣的觀念。防禦性編程（Defensive programming）是一種撰寫程式的態度與方法。
 
@@ -344,11 +478,417 @@ $installK \wedge onWindow10 \Rightarrow Abnormal$
 > A good programmer is someone who always looks both ways before crossing a one-way street. 
 > -- by [Doug Linder](https://en.wikipedia.org/wiki/Doug_Linder)
 
-[斷言- Java 實作](https://hackmd.io/@nlhsueh/BkvEMlhlT)
+### 2.4.1 斷言
 
-[例外處理- Java 實作](https://hackmd.io/@nlhsueh/BJqU7g2e6)
+> 就像排骨牌一樣，我們會設許多斷點，預防錯誤的擴散。
+
+本節介紹的斷言 java assertion 與例外處理都是一種防禦性的編程方法。
+
+斷言是 java 中用來檢查程式中的假設與斷言。例如你寫一個程式判斷汽車（或火箭）的速度，不管怎麼快，也不可能比光速快。所以你可以下一個斷言：計算出來的速度必定小於光速。當這個斷言被違反了，表示你的程式可能出現問題。
+
+其語法為：
+
+```java 
+// assert 後方接判斷句，例如 x<=100
+assert x<=100; 
+```
+
+或
+
+```java 
+// 如果沒有滿足錯誤，就顯示 errMessage 訊息
+// assert expression: errMessage
+assert x<=100 : "錯誤的總成績" ; 
+```
+
+其中 Expression1 是一個 boolean 表示式。errMessage 是一個含有值的表示式，當斷言不成立時，會拋出 java.lang.AssertionError 的例外，並把 errMessage 的值呈現出來。
+
+除此以外，斷言也可以幫助提升程式的可閱讀。如果你不用斷言，你的程式碼可能會出現：
+
+:-1: 不好的寫法：
+```java
+if (x<0) then
+   print("奇怪！");
+```
+
+這樣的程式碼，會和原有的程式邏輯攪在一起，降低了可閱讀性，造成維護上的困難。
+
+以下這個範例說明了 assert 的應用，假設我們自己寫一個 square (平方) 的程式，採取防禦性的開發方式每一次計算後就會斷言 a>=0，提昇程式的可靠度。
+
+```java
+Scanner sc = new Scanner(System.in);
+int a = sc.nextInt();
+int b = square(a);
+assert (a>=0): "平方後不可能 < 0";
+```
 
 
+#### 斷言的啟動
+
+為了讓 assertion 不會造成程式的負擔，你可以在編譯的時候決定是否要將 assertion 啟動（enable）。
+
+> javac -ea Calculator.java
+
+其中 `ea` 表示 enable assertion。
+
+![](https://hackmd.io/_uploads/rJg4NE602.png)
+圖：在 intellij 上設定 -ea 
+
+> 為你的一段程式碼加上斷言，enable 斷言以查核其正確。待確定程式無誤後，disable 這些斷言
+
+```java
+package org.example.u2debug;
+
+public class AssertionDemo {
+
+    public static void main(String[] args) {
+        AssertionDemo1 at = new AssertionDemo1();
+        System.out.println(at.checkTriangle(10, 23, 11));
+        System.out.println(at.checkTriangle(1, 1, 1));
+        System.out.println(at.checkTriangle(2, 2, 3));
+        System.out.println(at.checkTriangle(3, 2, 2));
+        System.out.println(at.checkTriangle(0, -1, -2));
+    }
+
+    public String checkTriangle(int a, int b, int c) {
+        if (a <= 0 || b <= 0 || c <= 0) {
+            System.out.println("長度不可以是負的");
+        }
+        assert a > 0 && b > 0 && c > 0;
+        if (a + b > c && b + c > a && c + a > b) {
+            if (a == b)
+                if (b == c) {
+                    return "正三角形";
+                } else
+                    return "等腰三角形";
+            else if (b == c) {
+                assert (a != b);
+                return "等腰三角形";
+            }
+            assert (a != b);
+            assert (a != c);
+            assert (b != c);
+            return "三角形";
+        }
+        return "非三角形";
+    }
+}
+```
+
+#### 什麼時候該用斷言?
+
+- 開發設計階段。使用 assertion 來測試，檢查程式中的錯誤。當此階段結束：即便沒有啟動 assertion, 也不會擔心系統錯誤。
+
+- 內部的不變式 Internal Invariants。程式撰寫的過程中，有任何的不變式都可以加上 assertion。
+
+    ```java
+    if (i % 3 == 0) {
+       ...
+    } else if (i % 3 == 1) {
+       ...
+    } else {
+       // 斷言前面的條件若不滿足，則 i%2 一定會等於 2
+       assert i % 3 == 2 : i; 
+       ...
+    }
+    ```
+
+加上這樣的斷言好像沒有作用，但當 i 的值為負數時，你會發現你以為的 2 並不會成真。這就是利用斷言的好處。
+
+- 類別的不變式 Class invariant。類別不變式表示該物件任何方法執行的前後都恆真的式子，例如一個 Stack 物件內部元素的個數一定介於 0 與最大值之間。
+
+    ```java
+    private boolean inv() {
+        return (num >= 0 && num < capacity);
+    }
+    ```
+
+所以我們可以在執行任何動作之後呼叫 inv() 來檢查是否發生異常：
+
+    ```java
+    push(x);
+    assert inv();
+    ...
+    y = pop(x);
+    assert inv();
+    ```
+
+- 不變的控制流 Control-Flow Invariants。對控制流程的斷言，我相信絕對不會到 05 行，因為迴圈內有一定會有一個滿足 if 的條件式。
+
+```java
+void foo() { 
+   for (...) {
+      if (...) return;
+   }
+   assert false; 
+}
+```
+
+如此，萬一真的跑到 05, 系統就會拋出例外警告。
+
+- 後置條件 Postconditions。在一段複雜的運算後，你斷定會成為真的事情，用斷言來加強。
+
+    ```java
+    sort(SORT.INC); //遞增
+    if (data.length >=2) assert data[0] <= data[1];
+    sort(SORT.DEC); //遞減
+    if (data.length >=2) assert data[0] >= data[1];
+    ```
+
+
+#### 什麼時候不該使用斷言?
+
+- 不要使用斷言來做公開方法的參數檢查。公開方法對參數的檢查本來就應該做，不要用 斷言 來檢查。公開的方法表示會有很多其他人會呼叫此方法，傳入各種不同的參數，為了避免他們傳錯，方法本來就必須測試這些參數，所以不該用斷言的方式來檢查。
+
+例如下面的程式，我們本來就該檢查 grade 是否正確，如果用 assert 來做，當我們 enable assert  時，成績輸入錯就檢查不出來了。
+
+```java
+public void addGrade(int grade) {
+   assert x <= 100: "grade > 100 error";
+   sum + = grade;    
+}
+```
+
+應該改成下面：
+
+```java
+public void addGrade(int grade) {
+   if (grade > 100) 
+       throw new Exception("grade > 100 error");
+   sum + = grade;    
+}
+```
+
+相反的，若是私有方法，其參數的約定式內部的，我們應該很清楚的知道不該有那樣不正確的參數傳入，所以可以用斷言。如果真的傳入奇怪的參數，就會拋出例外。
+
+- 不要使用斷言來執行程式邏輯相關的操作。不要把程式該做的工作放在 assert 中。因為 assert 以後可能會被 disable。例如在象棋系統中，某一段邏輯我們棋子移動或是吃子，因為移動或吃子都可能違法，所以他的 return type 是 boolean, 但切記不用 assert 去判斷這些動作：
+
+```java
+public void playGame() {
+   ...
+   assert chess1.move(12);
+   ...
+   assert chess3.eat(chess1);
+   ...
+}
+```
+
+原因一樣：如果你 disable 了斷言，這些動作就不能執行了。
+
+
+總言而之，記得這個原則：(1) 開發階段，有斷言，就寫斷言 (2) 如果我們移除了斷言，系統邏輯還是要對的，還是能夠做適當的防呆偵錯。
+
+:::success
+:basketball: 中斷應用
+設計一個 People 的類別，包含姓名, 身高, 體重, 生日年等資料，以及 bmi()等方法。透過 assert 來避免開發與測試時期的錯誤
+
+- 建立合適的建構子 (constructor) 來生成 People
+- bmi() 透過檢驗 bmi 的值應該落在某一個範圍內
+- 新增 People 內一個屬性 father, 其型態也是 People。People 內有一個 setBirthdayYear() 的方法來改變生日年。透過 assertion 來確保生日年的合理性。
+:::
+
+
+### 2.4.2 例外處理
+
+
+你不能掌控的事都可能出錯，發生例外。要寫一個穩健（robust）的系統，必須非常的細心，考慮到各種可能的例外情況，各種可能出錯的環境變數，並且做出應對。
+
+Java 中例外的種類：
+  
+- 需查核例外 checked exception: 你必須處理它（exception handle）或宣告它（讓別人來處理）。 如果你都沒有做，compiler 不會通過，直到你寫出你的*處理碼*。在 Java 中，Exception 下的類別，除了 RuntimeException 以外都是需查核例外。
+- 非查核例外 unchecked exception: 通常是程式邏輯的錯誤，例如 NullPointerException, ArrayIndexOutOfBoundsException -- 當發現此例外，你應該修正你的程式，而不是做例外處理，所以這一類的錯誤並不強制去處理。在 Java 中，RuntimeException 下的類別都屬於 非查核例外。
+
+
+:point_right: 捕捉或宣告原則 Catch or Declare Rule (CDR)：
+> 對於例外你只有兩個選擇：一是處理它，二是宣告這個例外讓呼叫者處理。
+
+> 寫一個模組程式和做一件事一樣，一方面你要把事情做好，一方面你要知道如何界定工作範圍 -- 對於你不能處理的事，你得上承給他人處理。
+
+#### 捕捉後處理
+
+這個程式中我們必須讀取 `grade.txt`，這是程式邏輯無法控制的事（無法確定執行環境會不會有此檔案），所以有可能產生例外。`FileNotFoundException` 是 `Exception` 的子類別，屬於 需查核例外，我們的處理方式就是呈現訊息，並且跳離系統。
+
+```java
+// use Exception
+static void openFile() {
+   try {
+      FileInputStream f = new FileInputStream("grade.txt");
+   } catch (FileNotFoundException e) {
+      System.out.println("File does not exist");
+      e.printStackTrace();
+    }
+}
+```
+
+#### People Example
+
+```java
+public class Main {
+    public static void main(String[] args) {
+
+        People john = new People("John", 1990);
+        try {
+            john.setHW(170, 60);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        float bmi = john.getBMI();
+        System.out.println(bmi);
+
+        People nick = null;
+        try {
+            nick = new People("name", 1.7f, 60, 1990);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+//        nick.setHW(1.7f, 60);
+        bmi = nick.getBMI();
+        System.out.println(bmi);
+
+        bmi = john.getBMI();
+        System.out.println(bmi);
+
+//        john.setHW(1.7f, 60);
+//        bmi = john.getBMI();
+//        System.out.println(bmi);
+//
+//        john.setHW(1.7f, 60);
+//        bmi = john.getBMI();
+//        System.out.println(bmi);
+    }
+}
+
+class People {
+    String name;
+    float height, weight, bmi;
+    int birthYear;
+
+    public People(String name, int birthYear) {
+        this.name = name;
+        this.birthYear = birthYear;
+    }
+
+    public People(String name, float height, float weight, int birthYear) throws Exception {
+        this.birthYear = birthYear;
+        this.name = name;
+        setHW(height, weight);
+    }
+
+    public void setHW(float height, float weight) throws Exception {
+        if (height > 2.2) {
+            throw new Exception("invalid height");
+        }
+        this.height = height;
+        this.weight = weight;
+        this.bmi = weight / (height * height);
+    }
+
+    float getBMI() {
+        assert this.bmi > 10 && this.bmi <= 50;
+        return bmi;
+    }
+}
+```
+
+自己定義 Exception
+
+```java
+public class ExceptionDemo {
+
+    public static void main(String[] args) {
+        int[] grade = {100, 2, -2};
+        try {
+            getGradeAverage(grade);
+        } catch (WrongGradeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+     * This program will demo how to define and use your exception
+     */
+    static double getGradeAverage(int g[]) throws WrongGradeException {
+        int sum = 0;
+        for (int i = 0; i < g.length; i++) {
+            if (g[i] > 100 || g[i] < 0) {
+                throw new WrongGradeException();
+            }
+            sum += g[i];
+        }
+        return sum / (double) (g.length);
+    }
+}
+
+class WrongGradeException extends Exception {
+    public WrongGradeException(String title) {
+        super(title);
+    }
+
+    public WrongGradeException() {
+        super("The grade is wrong, maybe greater than 100 or less than 0");
+    }
+}
+```
+
+#### 捕捉再拋出
+
+下述的程式中我們的處理方式是重新拋出該例外。請注意第 1 行的 throws 有加上 s, 第 5 行的則沒有。在宣告區的 throws 是有加上 s 的。
+
+```java 
+static void openFile3() throws FileNotFoundException {
+   try {
+      FileInputStream f = new FileInputStream("grade.txt");
+   } catch (FileNotFoundException e) {
+      System.out.println("File does not exist");
+      // re-throw the exception
+      throw new FileNotFoundException();
+   }
+}
+```
+
+#### 自己的例外自己定義
+
+```java
+static double getGradeAverage(int g[]) throws WrongGradeException {
+    int sum = 0;
+    for (int i = 0; i < g.length; i++) {
+        if (g[i] > 100 || g[i] < 0) {
+            throw new WrongGradeException(g[i]);
+        }
+        sum += g[i];
+    }
+    return sum / (double) (g.length);
+}
+
+// 自己定義的例外，裡面還封裝了成績分數
+class WrongGradeException extends Exception {
+    int wrongGrade;
+    public WrongGradeException(int grade) {
+        super("The grade is wrong, maybe > 100 or < 0");    
+        this.wrongGrade = grade;
+    }    
+    public int getGrade() { 
+       return wrongGrade; 
+    }
+}
+```
+
+People 類別內有出生年月日的屬性。請在生成方法內檢查例外（例如不合理的日期）並處理之。
+
+```java
+class People {
+   public People(int year, int month, int date) {
+      ...
+   }
+   
+}
+```
+- 同上，若這例外這是你無法處理的狀況 -- 請拋出一例外給上層（City 類別內會生成 People）來處理。
+- 同上，請宣告一個 InvalidDateException 來處理之。
+
+
+
+> 把「例外」視為「常態」是專業工程師必備的態度。
 
 ## 2.5 缺陷的管理
 
@@ -407,12 +947,11 @@ bug 終於被關閉了。但來來回回的信件往返中已經驚動了長官�
 
 > 如果要說有什麼好消息的話，那就是在會議結束後，大家甚至都忘記了 26 樓有個會議室，我也不需要對它做任何處理。
 
-:::info
+
 :question: 這個故事有哪些隱喻？請討論
 ```
 
 ```
-:::
 
 ### 2.5.2 Lala 語錄
 
@@ -513,14 +1052,14 @@ BTS 主要的功能如下：
 	- 系統有 fault, 就一定會有 failure
 	- 制定規格、軟體設計、軟體實作都可能是錯誤的來源，其中軟體實作是錯誤的最大根源。
 	
-
-
 - 追蹤程式時，step into 和 step over 有何差異？
+
 - 某病毒在 13 號星期五或聖誕節一定會發作，以下何者為真	
     - 今天沒有發作且今天不是聖誕節，則今天一定是 13 號
     - 今天 1/13 沒有發作，那們今天一定是星期五
     - 今天是聖誕耶，一定會發作
     - 今天不是 13 號也不是星期五，一定不會發作
+
 - 關於斷言，以下何者正確？	
 	- 斷言可以在編譯被 disable。
 	- assert false; 是錯誤的語法。
@@ -528,6 +1067,7 @@ BTS 主要的功能如下：
 	- 應該多利用斷言來取代程式邏輯的判斷，可以兼具錯誤管理的功能。
 	- 斷言不該應用於公開方法的前置條件的檢查。
 - 利用斷言與透過 if condition 來檢查有和不同？
+
 - 說明斷言使用的時機。
 
 ### 缺陷管理
@@ -539,32 +1079,24 @@ BTS 主要的功能如下：
 - 在本章的引文中，皇上對於 bug 的處理似乎不太滿意。這個小故事有何隱喻？
  
 
-:::success
-==EX_sin== 
 應用迴圈來寫一個程式計算 $sin(x)$,其中 $x$ 為一個徑度。30 度等於 $30*PI/180$ 徑度, 例如 $sin(30’) = sin(pi/6) = sin(3.14159/6)$ 約等於 $0.5$。使用 debug 的工具來協助你撰寫此程式。$sin(x)$ 的公式如下, 迴圈跑的越多次值會越精準, 當相鄰迴圈所跑出來的差異不大時，即可停止。
   
     $sin(x) = x - (x^3/3!) + (x^5/5!) - (x^7/7!)...$
 
 請利用 Debugger 的各種工具來協助擬進行此程式。
-:::
 
-:::info
-==Ex_Tree== 有一個 Tree 類別，一個 Node 類別。node1.add(node2) 可以把 node2 加到 node 的子節點。 tree.setRoot(node1) 可以設定 node1 為根節點。每個 node 內有一個數值，tree.getSum() 會傳回所有 node 的合。node.getSum() 會回傳該點和所有子節點的合。應用 assert 來寫這個程式。設計一些測試案例來測試此程式。(Hint: tree 不可以有 cyclic 的情形發生)
-:::
+    有一個 Tree 類別，一個 Node 類別。node1.add(node2) 可以把 node2 加到 node 的子節點。 tree.setRoot(node1) 可以設定 node1 為根節點。每個 node 內有一個數值，tree.getSum() 會傳回所有 node 的合。node.getSum() 會回傳該點和所有子節點的合。應用 assert 來寫這個程式。設計一些測試案例來測試此程式。(Hint: tree 不可以有 cyclic 的情形發生)
 
-:::success
-==Ex_Triangle== 有一function checkTriangle(int, int, int), 會輸入三邊長（a,b,c）
-- 有任一長度 <= 0 時，應該拋出例外
-- 須滿足任兩邊和大於第三邊，若違反則拋出一個字定義的例外：TriangleException
-- 依據條件回傳 正三角形、等腰三角形、直角三角形、一般三角形。（請注意定義直角三角形的定義）
-:::
 
-:::danger
-==EX_Heap==
-了解 [MaxHeap](https://docs.google.com/presentation/d/11ajG_oQkdPvYaAa7-9oGG-bFU34YJMmq8zZZIFch-Y4/edit?usp=sharing) 的運作原理，針對 [MaxHeap](MaxHeap) 的程式碼進行追蹤測試，透過變數的變化、step into 的流程執行了解檢查該程式是否正確。
+    **Ex_Triangle** 有一function checkTriangle(int, int, int), 會輸入三邊長（a,b,c）
+    - 有任一長度 <= 0 時，應該拋出例外
+    - 須滿足任兩邊和大於第三邊，若違反則拋出一個字定義的例外：TriangleException
+    - 依據條件回傳 正三角形、等腰三角形、直角三角形、一般三角形。（請注意定義直角三角形的定義）
+
+    **EX_Heap**
+    了解 [MaxHeap](https://docs.google.com/presentation/d/11ajG_oQkdPvYaAa7-9oGG-bFU34YJMmq8zZZIFch-Y4/edit?usp=sharing) 的運作原理，針對 [MaxHeap](MaxHeap) 的程式碼進行追蹤測試，透過變數的變化、step into 的流程執行了解檢查該程式是否正確。
 
 * 加上適當的 assertion 確保所有 heap 的限制是被滿足的。
-:::
 
 
 #### MaxHeap
