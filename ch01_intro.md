@@ -383,6 +383,8 @@ SQA 通常被翻譯成「軟體品質保證」，或「品保」，但這樣的�
 
 {%youtube BnBGh5wcpXo%}
 
+[YT: 瑞穗證券的烏龍指](https://youtu.be/BnBGh5wcpXo?si=-usiV6GHfGFElGrp)
+
 
 2015 年 9 月 3 日，一個長達 10 年的訴訟終於畫下了句號。這個判例將對 IT 行業產生深遠的影響：如果程式的 bug 導致了巨大的經濟損失，應該由誰來承擔？用戶？運營商？還是系統開發商？(本文取自 [程序bug導致了天大的損失，要槍斃程序猿嗎？](https://kb.cnblogs.com/page/541805/))
 
