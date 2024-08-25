@@ -1,28 +1,29 @@
 Ch02 錯與除錯
 ===
 
+<div style="background-color:Tomato;padding:10px;color:white">
 
-    一夥程式設計師正在啟奏當今皇上。「今年有什麼偉大的成就嗎？」皇上問道。
+一夥程式設計師正在啟奏當今皇上。「今年有什麼偉大的成就嗎？」皇上問道。
 
-    程式設計師私下討論了一會兒，然後回話：「比起去年，我們今年多修正了50% 的Bug」。
+程式設計師私下討論了一會兒，然後回話：「比起去年，我們今年多修正了50% 的Bug」。
 
-    皇上滿臉困惑的看著他們。他顯然並不知道「Bug」是什麼。他低聲與宰相商量一會兒，然後轉向這些程式設計師，面露慍色。
+皇上滿臉困惑的看著他們。他顯然並不知道「Bug」是什麼。他低聲與宰相商量一會兒，然後轉向這些程式設計師，面露慍色。
 
-    >「你們犯了品質管制不良之罪。明年起不得在有任何的Bug！」
+> 「你們犯了品質管制不良之罪。明年起不得在有任何的Bug！」
 
-    他當庭宣下這道聖旨。
+他當庭宣下這道聖旨。
 
-    當然啦，明年當這夥程式設計師再度向皇上奏報時，就完全不提 Bug 的事了 
+當然啦，明年當這夥程式設計師再度向皇上奏報時，就完全不提 Bug 的事了 
 
-    (取自溫伯格的「軟體管理學」第一卷 系統化思考)。
+(取自溫伯格的「軟體管理學」第一卷 系統化思考)。
+
+</div>
 
 ## 2.1 臭蟲與錯誤
 
 ### 2.1.1 臭蟲
 
-<center>
-<img src="img/ch02/bug.png" width="200">
-</center>
+<img src="img/ch02/bug.png" width="200" style="float:right">
 
 1947 年 9 月 9 日下午 3 點 45 分，**Grace Murray Hopper** 在她的筆記本上記下了史上第一個電腦 bug ——在 Harvard Mark II 電腦裡找到的一隻飛蛾，她把飛蛾貼在日記本上，並寫道「First actual case of bug being found」。這個發現奠定了 Bug 這個詞在電腦世界的地位，變成無數苦逼程式設計師的噩夢。 從那以後，bug 這個詞在電腦世界表示電腦程式中的錯誤或者疏漏，它們會使程式計算出莫名其妙的結果，甚至引起程式的崩潰。Grace Murray Hopper 是Harvard Mark I上第一個專職程式設計師，創造了現代第一個編譯器A-0 系統，以及第一個高級商用電腦程式語言「COBOL」，被譽為「COBOL 之母」，被稱為「不可思議的葛麗絲（Amazing Grace）」。
 
@@ -40,8 +41,6 @@ Ch02 錯與除錯
 
 Fault 錯誤一詞過於通用，在資訊領域比較常用的口頭說法是 `Bug`。但習慣上我們會誤解「Bug」所指的工程師的編碼錯誤，而且也過於淡化錯誤所帶來的影響。許多的錯誤來自於規格或設計錯誤，因此比較精準的說法是 「缺陷」（defect）- 表示系統的錯誤可能來自規格的錯誤、設計的錯誤或是編碼的錯誤。
 
-
-
 只有工程師會犯錯嗎？其實不然，我們所採用的編譯器 compiler ，框架frameowork 或 工具也可能出錯，都會造成錯誤的產生。錯誤一定會造成失效嗎？未必，有的程式已經運行了十幾年也沒有發生失效，可以說是運氣好，也可以說是運氣差- 因為越晚發現的錯誤越難修復。
 
 依據 IEEE Standard Glossary of Software Engineering Terminology" (standard 610.12, 1990):
@@ -51,7 +50,7 @@ Fault 錯誤一詞過於通用，在資訊領域比較常用的口頭說法是 `
 這裡的 developer 包含 軟體工程師、程式撰寫工程師、系統分析師與測試工程師。例如開發者可能會誤解設計符號、程式撰寫工程師可能打錯一個變數名稱等。
 
 > :point_right: **Faults** (Defects)
-A fault (defect) is introduced into the software as the result of an error. It is an anomaly in the software that may cause it to behave incorrectly, and not according to its specification.
+> A fault (defect) is introduced into the software as the result of an error. It is an anomaly in the software that may cause it to behave incorrectly, and not according to its specification.
 
 錯誤或缺失有時被稱為「bug」。缺失一詞更能凸顯需求規格或是設計文件的錯誤。缺失可以在審查的階段被發現並加以矯正。
 
@@ -82,24 +81,21 @@ A fault (defect) is introduced into the software as the result of an error. It i
 
 很顯然地三個規格比前兩者較好。
 
-:::success
 Ex:tennis: 有一個程式使用者輸入三個數字，並判斷其為何種三角形，請寫出其規格
-```
+```java
 int checkTriangle(int a, int b, int c) 
 - a, b, c 都必須大於0
 - ...
 - 
 ```
-:::
 
 Hint: 非三角、三角、正三角、等腰三角、等腰直角三角、直角。注意等腰直角三角的判斷條件。
 
-:::info
+---
+
 :question:是程式的缺陷？還是顧客的無理取鬧？
 
-
 - 「怎麼會有這麼誇張的 bug」, Peter 生氣的說「保單的獲利怎麼會是 0%?」
-
 Ace 耐著性子仔細的了解來龍去脈後說：「這是預設值，預設值都是 0，在保單生效前都是採取預設值。」
 - 「可是那不一樣，客戶的錢都還沒有進來，還沒有造成投資的事實，保單的獲利就不能說是0, 那表示他沒有賺錢，這樣會拉下我們整體的獲利率！」
 - 「上次在系統分析的會議中我們 Kevin 有問你們，你們說ok 的。」
@@ -109,13 +105,11 @@ Ace 耐著性子仔細的了解來龍去脈後說：「這是預設值，預設�
 
 （老天，我又不是金保系畢業的，誰知道這鬼東西？）-- Ace 心理想著。
 
-
 - 「你們得要在兩天內改完，而且我要扣你們的款」
 - 「兩天！不可能」「那牽涉到很多東西」
 - 「不過是把 0 改成未知，有這麼困難？」
-:::
 
---
+---
 
 如果沒有規格，寫的再好都會被強辭奪理成 bug。同理，明明是錯誤也會被強辭奪理成不是錯誤。
 
@@ -123,12 +117,11 @@ Ace 耐著性子仔細的了解來龍去脈後說：「這是預設值，預設�
 
 
 ![失效，缺陷與低品質](img/ch02/BugDefectLowQuality.png)
-:barber: 失效，缺陷與低品質
+失效，缺陷與低品質
 
 上圖說明失效、缺陷和低品質的關係。沒有失效並不代表系統沒有缺陷。沒有缺陷的系統也只是表示符合規格所定義的，規格書很難寫清楚的東西包含 非功能性需求，例如效能、可使用性、可維護性、可重用性等; 程式也可能沒有註解、沒有結構化設計、沒有考慮到容錯等，屬於低品質的軟體設計。
 
 一味的要求使用者必須定義完善的規格，卻不願意再好品質方面好好改善，這也不是一個專業軟體工程所該做的。
-
 
 > 作為一個專業的軟體工程師，應該探索所有可能的例外; 對於已知的系統限制與例外，都應該進行失效的預防。
 
@@ -169,10 +162,10 @@ p[1].sleep();
 - 超量的遞迴，即便是邏輯正確，也會造成堆疊易位溢位。
 - 釋放後使用 Use-after-free error, 使用一個 pointer, 它原先所指的空間已經釋放了。
 
-FIG: Race condition in multiple threads
+
 
 <img src="img/ch02/RaceCondition.png" width="300">
-
+圖：Race condition in multiple threads
 
 #### 多執行緒程式臭蟲
  
@@ -182,6 +175,8 @@ FIG: Race condition in multiple threads
 #### 介面臭蟲
  
 - 不正確的 API 使用，例如參數個數的錯誤、順序錯誤、資料型態錯誤等。
+
+
 
 ### 2.1.4 錯誤的預防
 
@@ -195,8 +190,8 @@ FIG: Race condition in multiple threads
 
 - *寫程式的模式*。例如採用 Defensive programming 的方式避免邏輯性的程式錯誤。Bug 通常會造成內部資料的不一致。我們寫程式的時候隨時的檢查是否有不一致的情況，發現不一致時可以終止程式的執行或是提供訊息給程式員。
 
-![](https://hackmd.io/_uploads/rJ4TX3KRh.jpg)
-:barber: 寫程式如過馬路，要小心預防各種可能的例外
+![](img/ch02/defense.png)
+圖：寫程式如過馬路，要小心預防各種可能的例外
 
 - *正規程式規格* Formal program specification。透過正規程式規格（formal program specification）來精準的描述規格（甚至是數學的表示式），借此避免設計上的錯誤。這種方法很難實施，因為要描述正規程式規格的成本太高。採用一些設計模型，例如 ER diagram, UML diagram 也可以較精準的呈現規格，避免錯誤。
 - *測試先行* Test first development。目前，自動化單元測試或是敏捷開發方式都強調測試先行的方法，比較適合目前不明確規格（poorly-specified requirements）的環境中。
@@ -207,10 +202,12 @@ FIG: Race condition in multiple threads
 - *根源問題分析* Root cause analysis。長期收集錯誤發生的現象，分析錯誤發生的原因。這是流程改善的一環。
 
 ![](img/ch02/tdd.png)
-:barber: Test first development
-
+圖：Test first development
 
 > 程式設計師不喜歡乾隆的第八個兒子，因為八阿哥（bug）
+
+
+
 
 ## 2.2 除錯
 
@@ -242,13 +239,13 @@ FIG: Race condition in multiple threads
 - *第六感*。就是覺得哪裡怪怪的。
 
 ![](img/ch02/detective.jpg)
-:barber: 除錯時要秉持著偵探的態度
-
-        
+圖：除錯時要秉持著偵探的態度
+    
 > Bug 是會害羞的。剛剛還很大方的和我在一起，人一多就躲起來了。
 
-### 2.2.2 方法
 
+
+### 2.2.2 方法
  
 - 從錯誤的外部形式入手，找出錯誤的地方。要閱讀錯誤訊息，不要因為是英文就跳過不看。
 - 研究程式，找出原因；
@@ -264,6 +261,8 @@ FIG: Race condition in multiple threads
 - 注意異常：發現有異常即立即處理，避免異常擴大到無法檢測的地步。（使用斷言）
 - 歸納演繹法：根據現象列出所有的假設，在逐步的實驗、分析以否決不對的假設，逐步的縮小可能的假設，找出真正問題的根源。
 
+
+
 ### 2.2.3 邏輯推演與除錯
 除錯的過程中需要從現象找出原因，這需要應用邏輯推演來協助。
 
@@ -274,8 +273,8 @@ $(p\Rightarrow q)\not \Rightarrow (q \Rightarrow p)$
 $(p\Rightarrow q)  \not \Rightarrow (\neg p \Rightarrow \neg q)$
 
 當多個原因造成一個現象：
-$p_1 \vee p_2 \vee p_3 \Rightarrow q$
 
+$p_1 \vee p_2 \vee p_3 \Rightarrow q$
 
 表示 $p_1$, $p_2$, $p_3$ 只要其中一個為真，就會造成 $q$ 現象。這也表示當 $q$ 現象沒有發生，$p_1$, $p_2$, $p_3$ 都不可能。亦即：
 
@@ -289,47 +288,39 @@ $p_1 \wedge p_2 \wedge p_3 \Rightarrow q$
 
 $\neg q \Rightarrow  \neg p_1 \vee \neg p_2 \vee \neg p_3$
 
-:::success
-Ex:football: 已知格式錯誤且住址長度超過50 以上，會產生Err101 的錯誤。以下的推斷是否正確：`目前沒有產生Err101 錯誤，而且我們確定格式有錯，因此可以斷定字串長度小於 50`
 
-```
-
-
+> ***Exercise*** 已知格式錯誤且住址長度超過50 以上，會產生Err101 的錯誤。以下的推斷是否正確：`目前沒有產生Err101 錯誤，而且我們確定格式有錯，因此可以斷定字串長度小於 50`
 
 
 ```
-:::
+exercise
 
-**說明**：目前沒有產生Err101 錯誤，表示格式沒有錯誤 或 長度沒有50。因為目前我們確定格式有錯，我們因此可以否定長度超過 50，亦即字串長度小於 50。
-
-
-:::success
-Ex:basketball: 有時候我們需要從一些線索（或現象）來推斷因果。例如，由一些使用者的回報現象如表，系統失效可能原因是什麼？
-<img src="img/ch02/tsr.png" width="250">
-```
 
 
 ```
-:::
+
+**說明**：目前沒有產生 Err101 錯誤，表示格式沒有錯誤 或 長度沒有50。因為目前我們確定格式有錯，我們因此可以否定長度超過 50，亦即字串長度小於 50。
 
 
+> ***Exercise*** 有時候我們需要從一些線索（或現象）來推斷因果。例如，由一些使用者的回報現象如表，系統失效可能原因是什麼？
+> 
+> <img src="img/ch02/tsr.png" width="250">
 
 我們初步斷定只要是有安裝卡巴防毒軟體（K）並且運行在 Window 10 作業系統時，系統就會產生異常（列印會當掉）。異常的情況與軟體版本、記憶體沒有關係，我們可以獲得此式：
 
 $installK \wedge onWindow10 \Rightarrow Abnormal$
 
-
 當然，資料量越多，得到的推論會越正確。但注意若有人反應：系統異常了，而且安裝了 window 10 的版本，是否可以斷定該使用者安裝 K？依據邏輯規則是不一定的，但我們卻常常犯了此錯誤。
-
 
 寫小程式時完全不感覺寫程式是困難的，也覺得「軟體品質」和自己沒有關係，但程式一旦大到一定程度，就會難以控制。
 
-## 2.3 除錯工具 (lab)
 
+
+## 2.3 除錯工具 (lab)
 
 除了理論以外，動手做是很重要的。以下的實作以 Java 為主，工具以 Eclipse 環境為主。測試的工具非常的多，這裡的實驗只是希望大家透過實作了解理論，真正的作業環境還是得看您開發的需求而定。
 
-Debug 面板（Debug perspective）是一個可以方便你除錯的面板。包含以下的功能
+Debug 面板（Debug perspective）是一個可以方便你除錯的面板。包含以下的功能:
 
 - 中斷點 Breakpoint。Resume 可以讓程式執行在下一個中斷點。
 - 看變數 Watch variable，例如觀看 i 目前的值為何。
@@ -368,11 +359,9 @@ Debug 面板（Debug perspective）是一個可以方便你除錯的面板。包
 可以選取一個 expression 來看他的值：
 
 ![](https://hackmd.io/_uploads/rkYkuntA3.png)
-:barber: watch Expression
+圖: `Watch` Expression
 
-:::success
-Ex:ice_skate: 設計一個程式，要求使用者輸入一個直徑，然後輸出其面積
-
+> ***Exercise*** 設計一個程式，要求使用者輸入一個直徑，然後輸出其面積
 
 ```java
 import java.util.Scanner;
@@ -393,13 +382,10 @@ public class BreakpointDemo {
     }
 }
 ```
-:::
 
-大家覺得上面的程式有沒有問題？請用中斷點來除錯。
+上面的程式有沒有問題？請用中斷點來除錯。
 
-
-:::success
-Ex:football: 請利用除錯工具來修復以下的程式
+> ***Exercise***: 請利用除錯工具來修復以下的程式
 
 ```java
 /*
@@ -452,17 +438,14 @@ public class BubbleSort {
     }
 }
 ```
-:::
 
-
-:::success
-:question: 以下程式，當我們把 breakpoint 設在第 2 行時，variable 的視窗呈現 a 的值是多少？(1) 100 (2) 101
+> :question: 以下程式，當我們把 breakpoint 設在第 2 行時，variable 的視窗呈現 a 的值是多少？(1) 100 (2) 101
 
 ```java
 int a = 100;
 a = a + 1;
 ```
-:::
+
 
 
 ## 2.4 防禦性編程 (lab)
@@ -478,6 +461,8 @@ a = a + 1;
 > A good programmer is someone who always looks both ways before crossing a one-way street. 
 > -- by [Doug Linder](https://en.wikipedia.org/wiki/Doug_Linder)
 
+
+
 ### 2.4.1 斷言
 
 > 就像排骨牌一樣，我們會設許多斷點，預防錯誤的擴散。
@@ -492,7 +477,6 @@ a = a + 1;
 // assert 後方接判斷句，例如 x<=100
 assert x<=100; 
 ```
-
 或
 
 ```java 
@@ -678,18 +662,16 @@ public void playGame() {
 
 總言而之，記得這個原則：(1) 開發階段，有斷言，就寫斷言 (2) 如果我們移除了斷言，系統邏輯還是要對的，還是能夠做適當的防呆偵錯。
 
-:::success
-:basketball: 中斷應用
-設計一個 People 的類別，包含姓名, 身高, 體重, 生日年等資料，以及 bmi()等方法。透過 assert 來避免開發與測試時期的錯誤
+> ***Lab*** 中斷應用
+> 設計一個 People 的類別，包含姓名, 身高, 體重, 生日年等資料，以及 bmi()等方法。透過 assert 來避免開發與測試時期的錯誤
 
 - 建立合適的建構子 (constructor) 來生成 People
 - bmi() 透過檢驗 bmi 的值應該落在某一個範圍內
 - 新增 People 內一個屬性 father, 其型態也是 People。People 內有一個 setBirthdayYear() 的方法來改變生日年。透過 assertion 來確保生日年的合理性。
-:::
+
 
 
 ### 2.4.2 例外處理
-
 
 你不能掌控的事都可能出錯，發生例外。要寫一個穩健（robust）的系統，必須非常的細心，考慮到各種可能的例外情況，各種可能出錯的環境變數，並且做出應對。
 
@@ -697,7 +679,6 @@ Java 中例外的種類：
   
 - 需查核例外 checked exception: 你必須處理它（exception handle）或宣告它（讓別人來處理）。 如果你都沒有做，compiler 不會通過，直到你寫出你的*處理碼*。在 Java 中，Exception 下的類別，除了 RuntimeException 以外都是需查核例外。
 - 非查核例外 unchecked exception: 通常是程式邏輯的錯誤，例如 NullPointerException, ArrayIndexOutOfBoundsException -- 當發現此例外，你應該修正你的程式，而不是做例外處理，所以這一類的錯誤並不強制去處理。在 Java 中，RuntimeException 下的類別都屬於 非查核例外。
-
 
 :point_right: 捕捉或宣告原則 Catch or Declare Rule (CDR)：
 > 對於例外你只有兩個選擇：一是處理它，二是宣告這個例外讓呼叫者處理。
@@ -757,7 +738,11 @@ public class Main {
 //        System.out.println(bmi);
     }
 }
+```
 
+The Peopl class:
+
+```java
 class People {
     String name;
     float height, weight, bmi;
@@ -886,12 +871,11 @@ class People {
 - 同上，若這例外這是你無法處理的狀況 -- 請拋出一例外給上層（City 類別內會生成 People）來處理。
 - 同上，請宣告一個 InvalidDateException 來處理之。
 
-
-
 > 把「例外」視為「常態」是專業工程師必備的態度。
 
-## 2.5 缺陷的管理
 
+
+## 2.5 缺陷的管理
 
 ### 2.5.1 大樓的燈 :bulb:
 
@@ -955,6 +939,7 @@ bug 終於被關閉了。但來來回回的信件往返中已經驚動了長官�
 
 ### 2.5.2 Lala 語錄
 
+<div style="color:gray;">
 為大虎保險公司開發的保險系統已經有一年，許多模組陸續上線測試，也頻頻出現問題，大虎的專案經理「福哥」似乎已經按捺不住，找雄太反應：
 
 「雄太，系統有問題沒有關係」福哥說：「但是要處理，處理的態度也很重要」
@@ -994,10 +979,13 @@ bug 終於被關閉了。但來來回回的信件往返中已經驚動了長官�
 
 > Lala 被告知要採用 BTS， 一開始有不被信任的感覺，而且每個錯誤都被真真切切的記錄下來，想賴也賴不掉。好處是：她寫程式可以專心些，不會被忽然緊急的電話打斷，二來是雄太和福哥也完整的知道她在處理哪些問題，處理的詳細情況都記錄在上面，不必一直重複的解釋。
 
+</div>
 
 ### 2.5.3 議題管理系統
 
+> :question:
 > :question: 市面上有哪些常用的 BTS/IMS？有哪些功能？IMS 的流程為何？
+> :question: 
 
 ![bug tracking flow](https://assets-global.website-files.com/6270e8022b05abb840d27d6f/628e65af19e76418ddf19251_Jira-Workflow-3.jpeg)
 
@@ -1040,10 +1028,12 @@ BTS 主要的功能如下：
 
 這些 Bug 追蹤系統各有特點，可以根據專案的具體需求和團隊的工作流程來選擇適合的系統。有些是自託管的，有些是雲端託管的，所以也要考慮到團隊的基礎設施需求。此外，一些開發團隊也選擇將多個工具結合使用，以滿足不同方面的需求。
 
-[](https://youtu.be/IFE8n6fhfRA?si=YrpLYRWxd_MmafrE)
+[YT: Jira bug life cycle](https://youtu.be/IFE8n6fhfRA?si=YrpLYRWxd_MmafrE)
 
 
 ## 2.6 練習
+
+### 題目
 
 - 以下何者正確	
 	- 只要程式的邏輯沒有出錯，就是一個沒有缺陷的系統。
@@ -1051,6 +1041,7 @@ BTS 主要的功能如下：
 	- 軟體只有執行後才能測試，也因此沒有足夠的時間除錯。
 	- 系統有 fault, 就一定會有 failure
 	- 制定規格、軟體設計、軟體實作都可能是錯誤的來源，其中軟體實作是錯誤的最大根源。
+
 	
 - 追蹤程式時，step into 和 step over 有何差異？
 
@@ -1061,32 +1052,28 @@ BTS 主要的功能如下：
     - 今天不是 13 號也不是星期五，一定不會發作
 
 - 關於斷言，以下何者正確？	
-	- 斷言可以在編譯被 disable。
-	- assert false; 是錯誤的語法。
-	- assert a>100: 100; 是錯誤的語法。
-	- 應該多利用斷言來取代程式邏輯的判斷，可以兼具錯誤管理的功能。
-	- 斷言不該應用於公開方法的前置條件的檢查。
+  - 斷言可以在編譯被 disable。
+  - assert false; 是錯誤的語法。
+  - assert a>100: 100; 是錯誤的語法。
+  - 應該多利用斷言來取代程式邏輯的判斷，可以兼具錯誤管理的功能。
+  - 斷言不該應用於公開方法的前置條件的檢查。
 - 利用斷言與透過 if condition 來檢查有和不同？
 
 - 說明斷言使用的時機。
 
-### 缺陷管理
-
-- 請討論圖的缺陷管理的流程，你認為一個缺陷的生命週期為何? 
-
-- 請安裝一個 Bug Tracking System, 並透過執行了解其功能。
-
-- 在本章的引文中，皇上對於 bug 的處理似乎不太滿意。這個小故事有何隱喻？
+- 缺陷管理
+  - 請討論圖的缺陷管理的流程，你認為一個缺陷的生命週期為何? 
+  - 請安裝一個 Bug Tracking System, 並透過執行了解其功能。
+  - 在本章的引文中，皇上對於 bug 的處理似乎不太滿意。這個小故事有何隱喻？
  
 
-應用迴圈來寫一個程式計算 $sin(x)$,其中 $x$ 為一個徑度。30 度等於 $30*PI/180$ 徑度, 例如 $sin(30’) = sin(pi/6) = sin(3.14159/6)$ 約等於 $0.5$。使用 debug 的工具來協助你撰寫此程式。$sin(x)$ 的公式如下, 迴圈跑的越多次值會越精準, 當相鄰迴圈所跑出來的差異不大時，即可停止。
+- 應用迴圈來寫一個程式計算 $sin(x)$,其中 $x$ 為一個徑度。30 度等於 $30*PI/180$ 徑度, 例如 $sin(30’) = sin(pi/6) = sin(3.14159/6)$ 約等於 $0.5$。使用 debug 的工具來協助你撰寫此程式。$sin(x)$ 的公式如下, 迴圈跑的越多次值會越精準, 當相鄰迴圈所跑出來的差異不大時，即可停止。
   
     $sin(x) = x - (x^3/3!) + (x^5/5!) - (x^7/7!)...$
 
-請利用 Debugger 的各種工具來協助擬進行此程式。
+- 請利用 Debugger 的各種工具來協助擬進行此程式。
 
-    有一個 Tree 類別，一個 Node 類別。node1.add(node2) 可以把 node2 加到 node 的子節點。 tree.setRoot(node1) 可以設定 node1 為根節點。每個 node 內有一個數值，tree.getSum() 會傳回所有 node 的合。node.getSum() 會回傳該點和所有子節點的合。應用 assert 來寫這個程式。設計一些測試案例來測試此程式。(Hint: tree 不可以有 cyclic 的情形發生)
-
+    - 有一個 Tree 類別，一個 Node 類別。node1.add(node2) 可以把 node2 加到 node 的子節點。 tree.setRoot(node1) 可以設定 node1 為根節點。每個 node 內有一個數值，tree.getSum() 會傳回所有 node 的合。node.getSum() 會回傳該點和所有子節點的合。應用 assert 來寫這個程式。設計一些測試案例來測試此程式。(Hint: tree 不可以有 cyclic 的情形發生)
 
     **Ex_Triangle** 有一function checkTriangle(int, int, int), 會輸入三邊長（a,b,c）
     - 有任一長度 <= 0 時，應該拋出例外
@@ -1096,13 +1083,14 @@ BTS 主要的功能如下：
     **EX_Heap**
     了解 [MaxHeap](https://docs.google.com/presentation/d/11ajG_oQkdPvYaAa7-9oGG-bFU34YJMmq8zZZIFch-Y4/edit?usp=sharing) 的運作原理，針對 [MaxHeap](MaxHeap) 的程式碼進行追蹤測試，透過變數的變化、step into 的流程執行了解檢查該程式是否正確。
 
-* 加上適當的 assertion 確保所有 heap 的限制是被滿足的。
+- 加上適當的 assertion 確保所有 heap 的限制是被滿足的。
 
 
-#### MaxHeap
+- MaxHeap
 
 Please fix the following code:
-```java=
+
+```java
 public class MaxHeap {
     private int[] heap;
     private int size;
@@ -1214,10 +1202,7 @@ public class MaxHeap {
 }
 ```
 
-
-
-
-參考解答：大樓的燈有哪些隱喻？
+### 參考解答：大樓的燈有哪些隱喻？
 
 - 「疊床架屋」、「治標不治本」的方式來處理問題往往在日後會造成更大的問題。
 - 錯誤產生了，但有時候很難界定錯誤的範圍，甚至很難講清楚何謂錯誤？（燈還是光？）。
